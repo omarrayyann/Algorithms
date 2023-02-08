@@ -1,3 +1,7 @@
+/*
+ 
+// Depth First Search (DFS) Algorithm
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -53,3 +57,4 @@ int main()
     DFS(graph, 0);
 }
 
+*/

@@ -1,3 +1,7 @@
+/*
+
+// Breadth First Search (BFS) Algorithm
+
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -58,3 +62,5 @@ int main()
     // Sample Run
     BFS(graph, 0);
 }
+
+*/
