@@ -39,7 +39,6 @@ void BFS(vector<vector<int>> &graph, int vertix)
             }
         }
 
-
         cout << "Finished the Discovery of Vertix (" << current_vertix << ")" << endl;
         
     }
