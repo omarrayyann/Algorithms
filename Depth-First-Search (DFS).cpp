@@ -1,5 +1,5 @@
-/*
- 
+
+
 // Depth First Search (DFS) Algorithm
 
 #include <iostream>
@@ -16,9 +16,7 @@ int current_time = 0;
 
 void DFS(vector<vector<int>> &graph, int vertix)
 {
-
     current_time++;
-
     if (visited.empty())
     {
         visited.resize(graph.size(), false);
@@ -56,5 +54,3 @@ int main()
     // Sample Run
     DFS(graph, 0);
 }
-
-*/

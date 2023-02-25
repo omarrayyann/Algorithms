@@ -6,29 +6,27 @@ using namespace std;
 
 void DFS(vector<vector<int>> &graph, int vertix);
 
-vector<bool> visited;
-
 // Run-Time: O(M+N) where M is the number of edges and N is the number of vertices
 // Input:
 // 1- Graph as an adjacency list (Vector used for simplicity)
-int number_of_connected_components(vector<vector<int>> graph){
-    
-    if (visited.empty())
-    {
-        visited.resize(graph.size(), false);
-    }
-    
-    
+vector<bool> visited;
+
+int number_of_connected_components(vector<vector<int>> graph)
+{
+
+    visited.resize(graph.size(), false);
     int components = 0;
-    for(int i = 0; i<graph.size(); i++){
-        if(!visited.at(i)){
-            DFS(graph,i);
+
+    for (int i = 0; i < graph.size(); i++)
+    {
+        if (!visited.at(i))
+        {
+            DFS(graph, i);
             components++;
         }
     }
     return components;
 }
-
 
 void DFS(vector<vector<int>> &graph, int vertix)
 {
@@ -43,7 +41,6 @@ void DFS(vector<vector<int>> &graph, int vertix)
             DFS(graph, graph.at(vertix).at(i));
         }
     }
-
 }
 
 // Example Run
@@ -54,14 +51,14 @@ int main()
     vector<vector<int>> graph = {
         {1, 2, 3},
         {0, 2, 3},
-        {0,1,3},
-        {0,1,2},
+        {0, 1, 3},
+        {0, 1, 2},
         {5},
         {4},
-        {7,8},
-        {6,8},
-        {6,7},};
+        {7, 8},
+        {6, 8},
+        {6, 7},
+    };
     // Sample Run
     cout << "Number of Components: " << number_of_connected_components(graph) << endl;
 }
-
