@@ -1,5 +1,3 @@
-/*
-
 // Breadth First Search (BFS) Algorithm
 
 #include <iostream>
@@ -17,7 +15,6 @@ vector<bool> visited;
 
 void BFS(vector<vector<int>> &graph, int vertix)
 {
-
     if (visited.empty())
     {
         visited.resize(graph.size(), false);
@@ -25,14 +22,13 @@ void BFS(vector<vector<int>> &graph, int vertix)
 
     queue<int> queue;
     queue.push(vertix);
-    visited.at(vertix) = true;
-    
+
     while (!queue.empty())
     {
-
         int current_vertix = queue.front();
         queue.pop();
-        
+        visited.at(current_vertix) = true;
+
         for (int i = 0; i < graph.at(current_vertix).size(); i++)
         {
 
@@ -44,14 +40,12 @@ void BFS(vector<vector<int>> &graph, int vertix)
         }
 
         cout << "Finished the Discovery of Vertix (" << current_vertix << ")" << endl;
-        
     }
 }
 
 // Example Run
 int main()
 {
-
     //  Sample Adjecency List
     vector<vector<int>> graph = {
         {1, 2},
@@ -62,5 +56,3 @@ int main()
     // Sample Run
     BFS(graph, 0);
 }
-
-*/
