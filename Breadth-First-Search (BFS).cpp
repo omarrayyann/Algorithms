@@ -22,12 +22,12 @@ void BFS(vector<vector<int>> &graph, int vertix)
 
     queue<int> queue;
     queue.push(vertix);
+    visited.at(vertix) = true;
 
     while (!queue.empty())
     {
         int current_vertix = queue.front();
         queue.pop();
-        visited.at(current_vertix) = true;
 
         for (int i = 0; i < graph.at(current_vertix).size(); i++)
         {
