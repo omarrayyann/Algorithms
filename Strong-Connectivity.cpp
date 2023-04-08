@@ -11,21 +11,50 @@ void DFS(vector<vector<int>> &graph, int vertix);
 // 1- Graph as an adjacency list (Vector used for simplicity)
 vector<bool> visited;
 
-int number_of_connected_components(vector<vector<int>> graph)
+bool strong_connectivity(vector<vector<int>> graph)
 {
 
-    visited.resize(graph.size(), false);
-    int components = 0;
+    // Checking if the Normal Graph DFS visits all nodes
 
-    for (int i = 0; i < graph.size(); i++)
+    DFS(graph, 0);
+
+    for (int i = 0; i < visited.size(); i++)
     {
         if (!visited.at(i))
         {
-            DFS(graph, i);
-            components++;
+            return false;
         }
     }
-    return components;
+
+    // Checking if the Reversed Graph DFS visits all nodes
+
+    // Forming the Reverse Graph
+    vector<vector<int>> reverse_graph;
+
+    reverse_graph.resize(graph.size());
+    for (int i = 0; i < graph.size(); i++)
+    {
+        int from = i;
+        for (auto to : graph.at(from))
+        {
+            reverse_graph.at(to).push_back(from);
+        }
+    }
+
+    for (int i = 0; i < visited.size(); i++)
+    {
+        visited.at(i) = false;
+    }
+    DFS(reverse_graph, 0);
+    for (int i = 0; i < visited.size(); i++)
+    {
+        if (!visited.at(i))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 void DFS(vector<vector<int>> &graph, int vertix)
@@ -49,16 +78,14 @@ int main()
 
     //  Sample Adjecency List
     vector<vector<int>> graph = {
-        {1, 2, 3},
-        {0, 2, 3},
-        {0, 1, 3},
-        {0, 1, 2},
-        {5},
-        {4},
-        {7, 8},
-        {6, 8},
-        {6, 7},
-    };
+        {1},
+        {2},
+        {3, 4},
+        {0},
+        {2}};
+    // Visited Initilization
+    visited.resize(graph.size(), false);
+
     // Sample Run
-    cout << "Number of Components: " << number_of_connected_components(graph) << endl;
+    cout << "Strongly Connected: " << strong_connectivity(graph) << endl;
 }
