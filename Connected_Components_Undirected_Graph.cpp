@@ -10,9 +10,6 @@ vector<bool> visited;
 vector<int> finish_times;
 vector<vector<int>> components = {};
 
-// Run-Time: O(M+N) where M is the number of edges and N is the number of vertices
-// Input:
-// 1- Graph as an adjacency list (Vector used for simplicity)
 void find_connected_components(vector<vector<int>> &graph)
 {
     visited.resize(graph.size(), false);
@@ -52,7 +49,7 @@ void DFS(vector<vector<int>> &graph, int vertix)
 int main()
 {
 
-    //  Sample Adjecency List
+    //  Sample Adjecency Listx
     vector<vector<int>> graph = {
         {1, 2, 3},
         {0, 2, 3},
