@@ -11,9 +11,6 @@ vector<bool> visited;
 stack<int> finished;
 vector<vector<int>> components = {{}};
 
-// Run-Time: O(M+N) where M is the number of edges and N is the number of vertices
-// Input:
-// 1- Graph as an adjacency list (Vector used for simplicity)
 void kosaraju(vector<vector<int>> &graph)
 {
 
