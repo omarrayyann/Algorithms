@@ -64,6 +64,9 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "__bits": "cpp"
+        "__bits": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "stack": "cpp"
     }
 }

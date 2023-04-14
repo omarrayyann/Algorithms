@@ -10,10 +10,11 @@ void DFS(vector<vector<int>> &graph, int vertix);
 vector<bool> visited;
 stack<int> finished;
 vector<vector<int>> components = {{}};
+
 // Run-Time: O(M+N) where M is the number of edges and N is the number of vertices
 // Input:
 // 1- Graph as an adjacency list (Vector used for simplicity)
-int find_strongly_connected_components(vector<vector<int>> &graph)
+void find_strongly_connected_components(vector<vector<int>> &graph)
 {
 
     // 1. Reverse the Graph
@@ -38,15 +39,15 @@ int find_strongly_connected_components(vector<vector<int>> &graph)
         }
     }
 
-    // cout << "jerr" << endl;
     // 3. DFS on the Nodes with decreasing order of finishing time
     visited.clear();
     visited.resize(reversed_graph.size(), false);
     components.clear();
-    while (!finished.empty())
+    stack<int> finished_temp = finished;
+    while (!finished_temp.empty())
     {
-        int currentNode = finished.top();
-        finished.pop();
+        int currentNode = finished_temp.top();
+        finished_temp.pop();
         if (!visited.at(currentNode))
         {
             components.push_back({});

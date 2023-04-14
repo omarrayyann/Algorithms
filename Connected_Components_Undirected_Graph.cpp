@@ -8,20 +8,21 @@ void DFS(vector<vector<int>> &graph, int vertix);
 
 vector<bool> visited;
 vector<int> finish_times;
+vector<vector<int>> components = {};
 
 // Run-Time: O(M+N) where M is the number of edges and N is the number of vertices
 // Input:
 // 1- Graph as an adjacency list (Vector used for simplicity)
-int number_of_strongly_connected_components(vector<vector<int>> &graph)
+void find_connected_components(vector<vector<int>> &graph)
 {
+    visited.resize(graph.size(), false);
 
-    // 1. Reverse the Graph
-    vector<vector<int>> reversed_graph;
     for (int i = 0; i < graph.size(); i++)
     {
-        for (int i = 0; i < graph.size(); i++)
+        if (!visited.at(i))
         {
-            reversed_graph.at(i).at(j) = graph.at(j).at(i);
+            components.push_back({});
+            DFS(graph, i);
         }
     }
 }
@@ -29,11 +30,13 @@ int number_of_strongly_connected_components(vector<vector<int>> &graph)
 void DFS(vector<vector<int>> &graph, int vertix)
 {
 
-    if(!visited.empty()){
+    if (!visited.empty())
+    {
         visited.resize(graph.size(), false);
     }
 
     visited.at(vertix) = true;
+    components.at(components.size() - 1).push_back(vertix);
 
     for (int i = 0; i < graph.at(vertix).size(); i++)
     {
@@ -62,5 +65,18 @@ int main()
         {6, 7},
     };
     // Sample Run
-    cout << "Number of Components: " << number_of_connected_components(graph) << endl;
+
+    find_connected_components(graph);
+
+    cout << "Number of Components: " << components.size() << endl;
+
+    for (int i = 0; i < components.size(); i++)
+    {
+        cout << "Component " << i + 1 << ": " << endl;
+        for (int j = 0; j < components.at(i).size(); j++)
+        {
+            cout << components.at(i).at(j) << " ";
+        }
+        cout << endl;
+    }
 }
