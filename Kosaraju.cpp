@@ -14,7 +14,7 @@ vector<vector<int>> components = {{}};
 // Run-Time: O(M+N) where M is the number of edges and N is the number of vertices
 // Input:
 // 1- Graph as an adjacency list (Vector used for simplicity)
-void find_strongly_connected_components(vector<vector<int>> &graph)
+void kosaraju(vector<vector<int>> &graph)
 {
 
     // 1. Reverse the Graph
@@ -86,7 +86,7 @@ int main()
         {3}};
 
     // Sample Run
-    find_strongly_connected_components(graph);
+    kosaraju(graph);
     cout << "Number of Components: " << components.size() << endl;
 
     for (int i = 0; i < components.size(); i++)
