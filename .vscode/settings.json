@@ -67,7 +67,8 @@
     "__bits": "cpp",
     "__tree": "cpp",
     "map": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "climits": "cpp"
   },
   "liveServer.settings.port": 5501
 }

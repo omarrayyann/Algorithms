@@ -18,7 +18,7 @@ bool subset_sum(vector<int> values, int sum, int i)
     }
     if (mem[i][sum] == -1)
     {
-        bool answer = subset_sum(values, sum - values.at(i), i - 1) || subset_sum(values, sum, i - 1) || subset_sum(values, sum - values.at(i), i);
+        bool answer = subset_sum(values, sum, i - 1) || subset_sum(values, sum - values.at(i), i);
         mem[i][sum] = answer;
         return answer;
     }

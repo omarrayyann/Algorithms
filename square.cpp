@@ -2,13 +2,17 @@
 #include <vector>
 #include <climits>
 #include <cmath>
+#include <chrono>
+using namespace std::chrono;
 
 using namespace std;
 
 long double square_fast(long long num)
 {
-    if (num < 0){
-        num = num * -1;}
+    if (num < 0)
+    {
+        num = num * -1;
+    }
 
     // base case
     if (to_string(num).length() == 1)
@@ -23,7 +27,8 @@ long double square_fast(long long num)
     vector<string> parts;
     parts.resize(3, "");
     int powerM;
-    if (numDigits == 2){
+    if (numDigits == 2)
+    {
         parts.at(0) = "0";
         parts.at(1) = to_string(num / 10);
         parts.at(2) = to_string(num % 10);
@@ -70,7 +75,11 @@ long double square_fast(long long num)
 int main()
 {
 
-    int number = 9999;
+    int number = 456;
+    auto start = high_resolution_clock::now();
+    cout << square_fast(456) << endl;
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
 
-    cout << square_fast(number) << endl;
+    cout << duration.count() << endl;
 }
