@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stack>
 using namespace std;
 
 int **mem;
@@ -35,6 +34,5 @@ int main()
             mem[i][j] = -1;
         }
     }
-    stack<int> current;
     cout << p(n, n - 1) << endl;
 }
