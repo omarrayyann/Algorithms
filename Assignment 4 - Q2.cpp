@@ -1,44 +1,59 @@
 #include <iostream>
 #include <vector>
-#include <stack>
 using namespace std;
 
-pair<int, vector<int>> *mem;
-stack<int> current;
+int *mem;
 
-pair<int, vector<int>> maxWeightIndependentSet(vector<int> weights, int i)
+int max_independent_set_value(vector<int> weights, int i)
 {
-    if (mem[i].first != -1)
+    if (i >= weights.size())
+    {
+        return 0;
+    }
+    if (mem[i] != -1)
     {
         return mem[i];
     }
-    if (i >= weights.size())
-    {
-        vector<int> temp;
-        return make_pair(0, vector<int>());
-    }
-    pair<int, vector<int>> option1 = maxWeightIndependentSet(weights, i + 1);
-    pair<int, vector<int>> option2 = maxWeightIndependentSet(weights, i + 2);
+    int ans = max(max_independent_set_value(weights, i + 1), weights.at(i) + max_independent_set_value(weights, i + 2));
+    mem[i] = ans;
+    return ans;
+}
 
-    option2.first += weights.at(i);
-    option2.second.push_back(i);
-
-    if (option2.first > option1.first)
+vector<int> max_independent_set_vertices(vector<int> weight)
+{
+    vector<int> vertices;
+    int sum = 0;
+    int i = weight.size() - 1;
+    while (i >= 0)
     {
-        mem[i] = option2;
-        return option2;
+        if ((mem[i] - weight[i] - sum) == 0)
+        {
+            vertices.push_back(i);
+            sum += weight[i];
+            i -= 2;
+        }
+        else
+        {
+            i--;
+        }
     }
-    mem[i] = option1;
-    return option1;
+    return vertices;
 }
 
 int main()
 {
-    vector<int> path = {1, 8, 6, 3, 6};
-    mem = new pair<int, vector<int>>[path.size() + 1];
-    for (int i = 0; i < path.size() + 1; i++)
+    vector<int> weight = {1, 4, 5, 2, 4, 5, 4, 3, 2, 4};
+    mem = new int[weight.size()];
+    for (int i = 0; i < weight.size(); i++)
     {
-        mem[i].first = -1;
+        mem[i] = -1;
     }
-    cout << maxWeightIndependentSet(path, 0).first << endl;
+    // these functions have to be ran in this order
+    cout << max_independent_set_value(weight, 0) << endl;
+    vector<int> vertices = max_independent_set_vertices(weight);
+    for (auto vertex : vertices)
+    {
+        cout << vertex << " ";
+    }
+    cout << endl;
 }
