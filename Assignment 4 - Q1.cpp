@@ -4,12 +4,8 @@ using namespace std;
 
 int **mem;
 
-int p(int sum, int i, stack<int> current)
+int p(int sum, int i)
 {
-    if (mem[sum][i] != -1)
-    {
-        return mem[sum][i];
-    }
     if (sum == 0)
     {
         return 1;
@@ -18,14 +14,18 @@ int p(int sum, int i, stack<int> current)
     {
         return 0;
     }
-    int answer = p(sum, i - 1, current) + p(sum - i, i, current);
+    if (mem[sum][i] != -1)
+    {
+        return mem[sum][i];
+    }
+    int answer = p(sum, i - 1) + p(sum - i, i);
     mem[sum][i] = answer;
     return answer;
 }
 
 int main()
 {
-    int n = 3;
+    int n = 4;
     mem = new int *[n + 1];
     for (int i = 0; i < n + 1; i++)
     {
