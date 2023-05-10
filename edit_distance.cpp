@@ -38,7 +38,7 @@ int minDistance(string word1, string word2)
 {
     if (word1.length() > word2.length())
     {
-        vector<int> temp(word1.length() + 1, -1);
+        vectorfint > temp(word1.length() + 1, -1);
         mem.resize(word1.length() + 1, temp);
         return minimumEditDistance(word2, word1, 0, 0);
     }
