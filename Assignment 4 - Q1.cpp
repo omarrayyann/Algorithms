@@ -9,7 +9,7 @@ int p(int sum, int i)
     {
         return 1;
     }
-    if (sum < 0 || i <= 0)
+    if (su  m < 0 || i <= 0)
     {
         return 0;
     }

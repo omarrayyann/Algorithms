@@ -5,58 +5,44 @@
 
 using namespace std;
 
-unordered_map<string, int> cost;
+vector<vector<int>> mem;
 
-int minimumEditDistance(string a, string b)
+int minimumEditDistance(string &a, string &b, int i, int j)
 {
-
-    if (cost.find(a + "-" + b) != cost.end())
+    if (mem.at(i).at(j) != -1)
     {
-        return cost.find(a + "-" + b)->second;
+        return mem.at(i).at(j);
     }
-
-    if (a == "" || b == "")
+    if (a.length() - i == 0 || b.length() - j == 0)
     {
-        int ans = max(b.length(), a.length());
-        string key = a + "-" + b;
-        cost[key] = ans;
-        return ans;
+        int answer = max(a.length() - i, b.length() - j);
+        mem.at(i).at(j) = answer;
+        return answer;
+    }
+    if (a[i] == b[j])
+    {
+        int answer = minimumEditDistance(a, b, i + 1, j + 1);
+        mem.at(i).at(j) = answer;
+        return answer;
     }
     else
     {
-        // replacing
-        int replacingCost = 0;
-        if (a[a.length() - 1] == b[b.length() - 1])
-        {
-            replacingCost = minimumEditDistance(a.substr(0, a.length() - 1), b.substr(0, b.length() - 1));
-        }
-        else
-        {
-            replacingCost = minimumEditDistance(a.substr(0, a.length() - 1), b.substr(0, b.length() - 1)) + 1;
-        }
-
-        // inserting
-        int insertingCost = 0;
-        insertingCost = minimumEditDistance(a, b.substr(0, b.length() - 1)) + 1;
-
-        // deleting
-        int deletingCost = 0;
-        deletingCost = minimumEditDistance(a.substr(0, a.length() - 1), b) + 1;
-
-        int ans = min(replacingCost, deletingCost);
-        ans = min(ans, insertingCost);
-
-        string key = a + "-" + b;
-        cost[key] = ans;
-        return ans;
+        int answer = min(1 + minimumEditDistance(a, b, i + 1, j + 1), 1 + minimumEditDistance(a, b, i, j + 1));
+        answer = min(answer, 1 + minimumEditDistance(a, b, i + 1, j));
+        mem.at(i).at(j) = answer;
+        return answer;
     }
 }
 
-int main()
+int minDistance(string word1, string word2)
 {
-
-    string a = "SP";
-    string b = "P";
-
-    cout << "Minimum: " << minimumEditDistance(a, b) << endl;
+    if (word1.length() > word2.length())
+    {
+        vector<int> temp(word1.length() + 1, -1);
+        mem.resize(word1.length() + 1, temp);
+        return minimumEditDistance(word2, word1, 0, 0);
+    }
+    vector<int> temp(word2.length() + 1, -1);
+    mem.resize(word2.length() + 1, temp);
+    return minimumEditDistance(word1, word2, 0, 0);
 }
