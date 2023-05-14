@@ -30,7 +30,6 @@ int main()
         mem[i] = -1;
     }
 
-    // true in last parameter as the question specified it is ok to take a high stress job in week 1
     cout << max_profit(low_stress_jobs, high_stress_jobs, low_stress_jobs.size() - 1) << endl;
 
     cout << endl;

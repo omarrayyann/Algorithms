@@ -60,7 +60,7 @@ int ford_fulkerson(vector<vector<int>> &graph, int starting, int goal)
 
             int parent_node = parent.at(current_node);
 
-            path_flow = min(path_flow, graph.at(parent_node).at(current_node));
+            path_flow = min(path_flow, residual_graph.at(parent_node).at(current_node));
             current_node = parent.at(current_node);
         }
 
@@ -76,6 +76,13 @@ int ford_fulkerson(vector<vector<int>> &graph, int starting, int goal)
         max_flow += path_flow;
     }
 
+    for(int i = 0; i<residual_graph.size(); i++){
+        for(int j = 0; j<residual_graph.size(); i++){
+            cout << graph.at(i).at(j) << " ";
+        }
+        cout << endl;
+    }
+
     return max_flow;
 }
 
@@ -84,8 +91,8 @@ int main()
     vector<vector<int>> graph = {
         {0, 36, 11, 8, 50, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, INT_MAX, 0, INT_MAX, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, INT_MAX, INT_MAX, 0},
-        {0, 0, 0, INT_MAX, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, INT_MAX, INT_MAX, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, INT_MAX, 0, 0},
         {0, 0, 0, 0, 0, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 42},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 8},
