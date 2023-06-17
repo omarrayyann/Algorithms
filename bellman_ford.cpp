@@ -27,7 +27,7 @@ vector<int> bellman_ford(vector<vector<int>> &graph, int starting)
         }
     }
 
-    // Relaxing the edges until no changes occur in an iteration (m-1) in the worst case
+    // Relaxing the edges until no changes occur in an iteration (n-1) in the worst case
     for (int i = 0; i < graph.size(); i++)
     {
         bool change = false;
