@@ -3,4 +3,4 @@ This repository contains all algorithms covered in the Algorithms course at NYUA
 
 Lecture Slides: www.drive.google.com/drive/u/1/folders/1T6g4dvIIzR6_4HshilI3DITUK2qRabnP (request access)
 
-Organized Algorithms Compliation: www.orayyan.com/algorithms (contact me in the case of any error)
+Organized Algorithms Compliation: www.orayyan.com/algorithms - contact me at olr7742@nyu.edu in the case you come across any error please :)
