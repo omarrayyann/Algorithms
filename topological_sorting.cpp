@@ -1,52 +1,68 @@
 #include <iostream>
 #include <vector>
-#include <climits>
-#include <stack>
 
 using namespace std;
 
-void DFS(vector<vector<int>> &graph, int vertix);
 vector<bool> visited;
-stack<int> finished;
+vector<int> finished;
 
-// assuming the graph is ascylic
-void topological_sorting(vector<vector<int>> &graph)
-{
-    visited.resize(graph.size(), false);
-    for (int i = 0; i < graph.size(); i++)
-    {
-        if (!visited.at(i))
-        {
-            DFS(graph, i);
-        }
+void DFS(vector<vector<int>> graph, int s){
+
+    if(visited[s]){
+        return;
     }
-}
 
-void DFS(vector<vector<int>> &graph, int vertix)
-{
+    visited[s] = true;
 
-    visited.at(vertix) = true;
-    for (int i = 0; i < graph.at(vertix).size(); i++)
-    {
-        if (!visited.at(graph.at(vertix).at(i)))
-        {
-            DFS(graph, graph.at(vertix).at(i));
+    for(int i = 0; i<graph[s].size(); i++){
+        if(!visited[graph[s][i]]){
+            DFS(graph,graph[s][i]);
         }
     }
 
-    finished.push(vertix);
+    finished.push_back(s);
+
 }
 
+vector<int> topological_sorting(vector<vector<int>> graph){
+
+    visited.resize(graph.size(),false);
+
+    for(int i = 0; i<graph.size(); i++){
+        DFS(graph,i);
+    }
+
+    reverse(finished.begin(),finished.end());
+
+    return finished;
+
+}
+ 
 int main()
 {
     vector<vector<int>> graph = {{1, 3}, {2}, {}, {1, 4, 5}, {5}, {}};
-    topological_sorting(graph);
+    vector<int> my_order = topological_sorting(graph);
+    vector<int> correct_order = {0,3,4,5,1,2};
 
-    // Possible Order
-
-    while (!finished.empty())
-    {
-        cout << finished.top() << " ";
-        finished.pop();
+    if(correct_order.size()!=my_order.size()){
+        cout << "Wrong!" << endl;
+        for(int i = 0; i<my_order.size(); i++){
+            cout << my_order[i] << " ";
+        }
+        return 0;
     }
+
+    for(int i = 0; i<my_order.size(); i++){
+        if(correct_order[i]!=my_order[i]){
+            cout << "Wrong!" << endl;
+            for(int i = 0; i<my_order.size(); i++){
+                cout << my_order[i] << " ";
+            }
+            return 0;
+        }
+    }
+
+    cout << "Success!" << endl;
+    
+    
 }
